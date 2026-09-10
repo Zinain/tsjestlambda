@@ -23,4 +23,41 @@ describe("API Gateway integration", () => {
         });
     });
 
+    test("POST /order calculates order total", async () => {
+
+        const response = await fetch(
+            `${API_BASE_URL}/order`,
+        {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            products: [
+            {
+                name: "Laptop",
+                price: 1000,
+                quantity: 1
+            },
+            {
+                name: "Mouse",
+                price: 50,
+                quantity: 2
+            }
+            ]
+        })
+        }
+    );
+
+        expect(response.status).toBe(200);
+    
+        const body = await response.json();
+    
+        expect(body).toEqual({
+            total: 1100
+        });
+    });
+
 });

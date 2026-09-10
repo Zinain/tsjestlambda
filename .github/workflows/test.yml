@@ -31,7 +31,7 @@ jobs:
         run: npm test
 
   integration-test:
-
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
