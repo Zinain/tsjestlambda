@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest --testPathIgnorePatterns=integration",
     "test:integration": "jest integration",
     "test:coverage": "jest --coverage --testPathIgnorePatterns=integration",
