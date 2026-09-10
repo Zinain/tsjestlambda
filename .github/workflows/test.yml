@@ -47,6 +47,9 @@ jobs:
     - name: Setup AWS SAM
       uses: aws-actions/setup-sam@v2
 
+    - name: Build TypeScript
+      run: npm run build
+
     - name: Start SAM API
       run: |
         sam local start-api > sam.log 2>&1 &
