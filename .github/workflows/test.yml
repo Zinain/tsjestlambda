@@ -44,7 +44,30 @@ jobs:
 
     - run: npm ci
 
+    - name: Setup AWS SAM
+      uses: aws-actions/setup-sam@v2
+
+    - name: Start SAM API
+      run: |
+        sam local start-api > sam.log 2>&1 &
+        echo $! > sam.pid
+
+    - name: Wait for API
+      run: |
+        for i in {1..30}; do
+          if curl --fail --silent \
+            http://127.0.0.1:3000/hello > /dev/null; then
+            echo "SAM API is ready"
+            exit 0
+          fi
+          echo "Waiting for SAM..."
+          sleep 2
+        done
+        echo "SAM failed to start"
+        cat sam.log
+        exit 1
+
     - name: Test deployed API
       env:
-        API_BASE_URL: ${{ vars.API_BASE_URL }}
+        API_BASE_URL: http://127.0.0.1:3000
       run: npm run test:integration
