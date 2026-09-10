@@ -6,7 +6,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
-      Handler: dist/src/exampleFile.handler
+      Handler: dist/src/lambda.handler
       Runtime: nodejs22.x
 
       Events:
