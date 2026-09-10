@@ -52,11 +52,35 @@ describe("API Gateway integration", () => {
     );
 
         expect(response.status).toBe(200);
+
+        const body = await response.json();
+
+        expect(body).toEqual({
+            total: 1100
+        });
+    });
+
+        test("POST /order returns 400 when body is invalid", async () => {
+        
+        const response = await fetch(
+        `${API_BASE_URL}/order`,
+        {
+        method: "POST",
+        
+        headers: {
+            "Content-Type": "application/json"
+        },
+    
+        body: JSON.stringify({})
+        }
+    );
+    
+        expect(response.status).toBe(400);
     
         const body = await response.json();
     
         expect(body).toEqual({
-            total: 1100
+            error: "products must be an array"
         });
     });
 
