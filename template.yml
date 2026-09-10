@@ -17,14 +17,15 @@ Resources:
             Method: get
 
   OrderFunction:
-  Type: AWS::Serverless::Function
-  Properties:
-    CodeUri: .
-    Handler: dist/src/orderLambda.handler
-    Runtime: nodejs22.x
-    Events:
-      OrderApi:
-        Type: Api
-        Properties:
-          Path: /order
-          Method: post
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: dist/src/orderLambda.handler
+      Runtime: nodejs22.x
+      
+      Events:
+        OrderApi:
+          Type: Api
+          Properties:
+            Path: /order
+            Method: post
