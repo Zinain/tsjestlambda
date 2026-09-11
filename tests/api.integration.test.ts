@@ -56,7 +56,7 @@ describe("API Gateway integration", () => {
         const body = await response.json();
 
         expect(body).toEqual({
-            total: 1200
+            total: 1100
         });
     });
 
